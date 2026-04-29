@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>मूत पिएगा मेरा</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+        
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #1a0033, #330000);
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+        }
+        
+        .container {
+            text-align: center;
+        }
+        
+        h1 {
+            color: #ff3366;
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px rgba(255, 51, 102, 0.6);
+        }
+        
+        .button {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(145deg, #ff1a4d, #cc0033);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 
+                0 25px 50px rgba(255, 26, 77, 0.5),
+                inset 0 -15px 30px rgba(255,255,255,0.2);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        
+        .button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 35px 70px rgba(255, 26, 77, 0.6);
+        }
+        
+        .button:active {
+            transform: scale(0.92);
+        }
+        
+        .instructions {
+            margin-top: 3rem;
+            color: #ff99aa;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Click The Button</h1>
+        
+        <button class="button" id="playButton">
+            ▶️ PLAY
+        </button>
+        
+        <p class="instructions">Click the big red button</p>
+    </div>
+
+    <audio id="sound" preload="auto">
+        <!-- Put your voice note here -->
+        <source src="test.ogg" type="audio/ogg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        const button = document.getElementById('playButton');
+        const audio = document.getElementById('sound');
+        
+        button.addEventListener('click', () => {
+            audio.currentTime = 0;
+            audio.play().catch(() => {
+                alert("Couldn't play the sound.\n\nMake sure the .opus file is in the same folder as this HTML file.");
+            });
+            
+            // Quick press animation
+            button.style.transform = 'scale(0.85)';
+            setTimeout(() => button.style.transform = 'scale(1)', 120);
+        });
+        
+        // Spacebar support
+        document.addEventListener('keydown', e => {
+            if (e.key === ' ' || e.key === 'Enter') button.click();
+        });
+    </script>
+</body>
+</html>
